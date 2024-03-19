@@ -1,32 +1,30 @@
-import React, { ChangeEvent } from 'react';
+import React, { ComponentPropsWithoutRef, ForwardedRef } from 'react';
+import { cn } from '@/lib/utils.ts';
 
-interface InputProps {
-  value: string;
-  onChange: (value: string) => void;
-  placeholder?: string;
-  disabled?: boolean;
+interface InputProps extends ComponentPropsWithoutRef<'input'> {
+  variant: 'gray' | 'white';
 }
 
-const Input: React.FC<InputProps> = ({
-  value,
-  onChange,
-  placeholder = '',
-  disabled = false
-}) => {
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
-  };
-
-  return (
-    <input
-      type="text"
-      value={value}
-      onChange={handleChange}
-      placeholder={placeholder}
-      disabled={disabled}
-      className="px-5 py-3 text-sm font-semibold border-[1.5px] border-gray-300 rounded-3xl focus:outline-none focus:border-blue-500 w-[338px]  h-[54px]"
-    />
-  );
-};
+const Input = React.forwardRef(
+  (
+    { variant, ...otherProps }: InputProps,
+    ref: ForwardedRef<HTMLInputElement>
+  ) => {
+    const inputVariant = {
+      gray: 'bg-hc-gray',
+      white: 'bg-hc-white'
+    };
+    return (
+      <input
+        className={cn(
+          'w-[338px] h-[54px] rounded-3xl border-2 border-hc-grayLight focus:outline-none px-12 py-3 text-lg font-semibold',
+          inputVariant[variant]
+        )}
+        {...otherProps}
+        ref={ref}
+      />
+    );
+  }
+);
 
 export default Input;
