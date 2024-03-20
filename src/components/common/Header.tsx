@@ -24,16 +24,18 @@ const Header = ({
   };
   return (
     <header
-      className={'flex flex-col w-full h-[54px] justify-center items-center'}>
+      className={
+        'flex flex-col w-full h-[54px] justify-center items-center shadow-md border-b border-b-hc-grayLight'
+      }>
       {variant === 'default' ? (
-        <div className={'flex w-full h-full justify-center items-center mt-1'}>
+        <div className={'flex w-full h-full justify-center items-center'}>
           <HcLogoLabel
             width={85}
             height={20}
           />
         </div>
       ) : (
-        <div className={'flex w-full h-full justify-start items-center mt-1'}>
+        <div className={'flex w-full h-full justify-start items-center'}>
           <ChevronLeft
             className={'cursor-pointer absolute'}
             onClick={handleGoToBack}
@@ -47,7 +49,6 @@ const Header = ({
           </div>
         </div>
       )}
-      <div className={'w-full h-1 bg-gray-300 shadow-md shadow-hc-grayDark'} />
     </header>
   );
 };
