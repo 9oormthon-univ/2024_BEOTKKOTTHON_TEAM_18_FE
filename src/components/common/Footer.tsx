@@ -11,7 +11,10 @@ const Footer = () => {
   const location = useLocation();
 
   return (
-    <footer className={'w-full h-[64px] flex justify-evenly'}>
+    <footer
+      className={
+        'w-full h-[64px] flex justify-evenly shadow-2xl border-t border-t-hc-gray rounded-t-3xl'
+      }>
       <FooterElement
         icon={
           <HomeIcon
