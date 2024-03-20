@@ -7,7 +7,7 @@ const SvgUserIcon = (props: SVGProps<SVGSVGElement>) => (
     fill="none"
     {...props}>
     <path
-      stroke="#585858"
+      stroke="current"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}

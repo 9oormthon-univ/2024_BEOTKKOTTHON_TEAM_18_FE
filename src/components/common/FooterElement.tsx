@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface FooterElementProps {
   icon: React.ReactNode;
@@ -8,6 +8,8 @@ interface FooterElementProps {
 
 const FooterElement = ({ icon, label, path }: FooterElementProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const handleMoveToPath = () => {
     navigate(path);
   };
@@ -16,7 +18,10 @@ const FooterElement = ({ icon, label, path }: FooterElementProps) => {
       className={'flex flex-col justify-center items-center cursor-pointer'}
       onClick={handleMoveToPath}>
       <div>{icon}</div>
-      <div className={'text-[10px]'}>{label}</div>
+      <div
+        className={`text-[10px] ${location.pathname === path ? 'text-hc-blue-dark' : ''}`}>
+        {label}
+      </div>
     </div>
   );
 };
