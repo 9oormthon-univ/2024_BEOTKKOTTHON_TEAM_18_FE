@@ -15,10 +15,19 @@ const Home = () => {
           hasMoreDetails={true}
         />
       </section>
-      <section className={'w-full h-1/3'}>
-        <SectionHeader title={'관심 분야'} />
+      <section className={'w-full h-fit'}>
+        <SectionHeader title={'관심분야'} />
+        <div className={'grid grid-cols-4 gap-y-2'}>
+          {interestLogoLabelInfo.map((interest, index) => (
+            <InterestItem
+              key={`interest-${index}`}
+              imgSrc={interest.logoPath}
+              label={interest.label}
+            />
+          ))}
+        </div>
       </section>
-    </div>
+    </>
   );
 };
 
