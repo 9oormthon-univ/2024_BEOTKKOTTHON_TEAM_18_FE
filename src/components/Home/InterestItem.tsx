@@ -11,7 +11,7 @@ interface InterestItemProps {
 
 const InterestItem = ({ imgSrc, label }: InterestItemProps) => {
   return (
-    <div className={'flex flex-col justify-center items-center'}>
+    <div className={'flex flex-col justify-center items-center cursor-pointer'}>
       <Avatar>
         <AvatarImage src={imgSrc} />
         <AvatarFallback>{`${label} 로고`}</AvatarFallback>
