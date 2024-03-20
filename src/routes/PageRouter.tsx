@@ -6,6 +6,7 @@ import HLayout from '@/routes/HLayout.tsx';
 import DdeepCreate from '@/pages/Ddeep/DdeepCreate.tsx';
 import DdeepDetail from '@/pages/Ddeep/DdeepDetail.tsx';
 import Message from '@/pages/Message';
+import MyPage from '@/pages/MyPage';
 
 const PageRouter = () => {
   return (
@@ -22,6 +23,10 @@ const PageRouter = () => {
         <Route
           path={'/message'}
           element={<Message />}
+        />
+        <Route
+          path={'/mypage'}
+          element={<MyPage />}
         />
       </Route>
       <Route element={<HLayout />}>
