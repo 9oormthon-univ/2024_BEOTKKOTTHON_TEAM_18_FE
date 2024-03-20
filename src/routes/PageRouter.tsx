@@ -2,6 +2,10 @@ import { Route, Routes } from 'react-router-dom';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import HFLayout from '@/routes/HFLayout.tsx';
+import HLayout from '@/routes/HLayout.tsx';
+import DdeepCreate from '@/pages/Ddeep/DdeepCreate.tsx';
+import DdeepDetail from '@/pages/Ddeep/DdeepDetail.tsx';
+import Message from '@/pages/Message';
 
 const PageRouter = () => {
   return (
@@ -10,6 +14,20 @@ const PageRouter = () => {
         <Route
           path="/"
           element={<Home />}
+        />
+        <Route
+          path={'/ddeep/create'}
+          element={<DdeepCreate />}
+        />
+        <Route
+          path={'/message'}
+          element={<Message />}
+        />
+      </Route>
+      <Route element={<HLayout />}>
+        <Route
+          path={'/ddeep/:id'}
+          element={<DdeepDetail />}
         />
       </Route>
       <Route
