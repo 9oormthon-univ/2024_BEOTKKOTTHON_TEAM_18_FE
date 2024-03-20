@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepare": "husky",
-    "icons": "npx @svgr/cli --out-dir src/components/icons -- public/"
+    "icons": "npx @svgr/cli --out-dir src/components/icons -- public/assets/images"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.28.0",
