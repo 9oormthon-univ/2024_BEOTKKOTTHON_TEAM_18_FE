@@ -1,13 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
-import Layout from './Layout.tsx';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
+import HFLayout from '@/routes/HFLayout.tsx';
 
 const PageRouter = () => {
   return (
     <Routes>
-      {/* Layout을 사용하는 Route 내부는 헤더와 푸터가 적용됩니다! */}
-      <Route element={<Layout />}>
+      <Route element={<HFLayout />}>
         <Route
           path="/"
           element={<Home />}
