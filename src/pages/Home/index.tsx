@@ -1,19 +1,25 @@
 import SectionHeader from '@/components/Home/SectionHeader.tsx';
+import { interestLogoLabelInfo } from '@/constants/interestLogoLabelInfo.ts';
+import InterestItem from '@/components/Home/InterestItem.tsx';
+import ParticipatingCarousel from '@/components/Home/ParticipatingCarousel.tsx';
+import RecruitingCarousel from '@/components/Home/RecruitingCarousel.tsx';
 
 const Home = () => {
   return (
-    <div className={'h-full'}>
-      <section className={'w-full h-1/3'}>
+    <>
+      <section className={'w-full h-fit'}>
         <SectionHeader
           title={'모집중인 띱'}
           hasMoreDetails={true}
         />
+        <RecruitingCarousel />
       </section>
-      <section className={'w-full h-1/3'}>
+      <section className={'w-full h-[300px] bg-hc-blue-light'}>
         <SectionHeader
           title={'참여중인 띱'}
           hasMoreDetails={true}
         />
+        <ParticipatingCarousel />
       </section>
       <section className={'w-full h-fit'}>
         <SectionHeader title={'관심분야'} />
