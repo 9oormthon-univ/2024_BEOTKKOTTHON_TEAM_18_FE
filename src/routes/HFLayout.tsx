@@ -6,7 +6,7 @@ const HFLayout = () => {
   return (
     <div className={'w-[390px] h-dvh mx-auto border-2 border-hc-blue-light'}>
       <Header />
-      <main>
+      <main className={'h-[calc(100dvh-118px)]'}>
         <Outlet />
       </main>
       <Footer />
