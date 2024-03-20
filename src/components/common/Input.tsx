@@ -17,7 +17,7 @@ const Input = React.forwardRef(
     return (
       <input
         className={cn(
-          'w-[338px] h-[54px] rounded-3xl border-2 border-hc-grayLight focus:outline-none px-12 py-3 text-lg font-semibold',
+          'w-[338px] h-[54px] rounded-3xl border-2 border-hc-grayLight focus:outline-none text-lg font-semibold text-center',
           inputVariant[variant]
         )}
         {...otherProps}
@@ -26,5 +26,7 @@ const Input = React.forwardRef(
     );
   }
 );
+
+Input.displayName = 'Input';
 
 export default Input;

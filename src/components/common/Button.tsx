@@ -21,7 +21,7 @@ const Button = ({ variant, size, children, ...otherProps }: ButtonProps) => {
     <button
       {...otherProps}
       className={cn(
-        'px-12 py-3 text-lg font-semibold text-white bg-blue-500 rounded-3xl focus:outline-none w-[338px] h-[54px]',
+        'text-lg font-semibold text-white bg-blue-500 rounded-3xl focus:outline-none w-[338px] h-[54px] text-center',
         buttonType[variant],
         buttonSize[size]
       )}>
