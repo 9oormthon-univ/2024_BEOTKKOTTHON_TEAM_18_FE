@@ -1,8 +1,10 @@
 import { Outlet } from 'react-router-dom';
+import Header from '@/components/common/Header.tsx';
 
-const Layout = () => {
+const HLayout = () => {
   return (
     <div className={'w-[390px] h-dvh mx-auto border-2 border-hc-blue-light'}>
+      <Header />
       <main>
         <Outlet />
       </main>
@@ -10,4 +12,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default HLayout;

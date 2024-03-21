@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     colors: {
       'hc-blue-light': '#F7F9FF',
+      'hc-blue-300': '#50A1FF',
       'hc-blue': '#2388FF',
       'hc-blue-dark': '#2463FF',
       'hc-blue-darker': '#003CD2',
