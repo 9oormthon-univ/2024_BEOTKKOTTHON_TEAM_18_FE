@@ -1,7 +1,88 @@
+import Button from '@/components/common/Button';
+import Input from '@/components/common/Input';
+import React, { useState } from 'react';
+
 const Login = () => {
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+  const [idError, setIdError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  const handleLogin = () => {
+    setIdError(id === '');
+    setPasswordError(password === '');
+
+    if (id === '' || password === '') {
+      return;
+    }
+
+    console.log('id : ', id);
+    console.log('password : ', password);
+  };
+
   return (
-    <div>
-      <h1>Login</h1>
+    <div className={'flex justify-center items-center h-screen'}>
+      <div
+        className={
+          'w-[390px] h-dvh flex flex-col items-center justify-center mb-40'
+        }>
+        <img
+          src="/public/assets/images/loginLogo.png"
+          alt="login-logo"
+        />
+        <form className={'flex flex-col mt-10'}>
+          <Input
+            variant="gray"
+            placeholder="아이디를 입력해주세요"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            error={idError}
+          />
+          {idError && (
+            <div>
+              <hr className="w-5/6 mt-1 ml-7 text-hc-coral" />
+              <p className="mt-1 text-sm ml-7 text-hc-coral">
+                아이디를 입력해주세요!
+              </p>
+            </div>
+          )}
+
+          <Input
+            variant="gray"
+            placeholder="비밀번호를 입력해주세요"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            error={passwordError}
+          />
+          {passwordError && (
+            <div>
+              <hr className="w-5/6 mt-1 ml-7 text-hc-coral" />
+              <p className="mt-1 text-sm ml-7 text-hc-coral">
+                비밀번호를 입력해주세요!
+              </p>
+            </div>
+          )}
+        </form>
+
+        <Button
+          variant="primary"
+          size="lg"
+          onClick={handleLogin}
+          children="로그인"
+        />
+
+        <p className={'mt-5 text-hc-grayDark text-xs'}>
+          아직 회원가입을 안하셨나요?
+          <a
+            href="/signup"
+            className={
+              'ml-2 underline hover:text-hc-blue hover:font-semibold underline-offset-4'
+            }>
+            회원가입
+          </a>
+        </p>
+      </div>
     </div>
   );
 };
