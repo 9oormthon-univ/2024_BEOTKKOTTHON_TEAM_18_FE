@@ -13,7 +13,7 @@ const Button = ({ variant, size, children, ...otherProps }: ButtonProps) => {
     secondary: 'bg-gray-500'
   };
   const buttonSize = {
-    sm: 'px-4 py-2 text-sm',
+    sm: 'w-[89px] px-4 py-2 text-sm',
     md: 'px-8 py-3 text-base',
     lg: 'px-12 py-4 text-lg'
   };
