@@ -82,7 +82,7 @@ const SignUp = () => {
           {!isPasswordValid && (
             <div>
               <hr className="w-5/6 mt-1 border ml-7 text-hc-coral" />
-              <p className="text-[12px] text-hc-coral">
+              <p className="text-[12px] text-hc-coral ml-[16px]">
                 영어, 특수문자 포함 8자리 이상이어야 합니다.
               </p>
             </div>
@@ -101,8 +101,10 @@ const SignUp = () => {
 
           {password !== confirmPassword && confirmPassword.length > 0 && (
             <div>
-              <hr className="w-5/6 mt-1 border ml-7 text-hc-coral" />{' '}
-              <p className="text-red-500">비밀번호가 일치하지 않습니다.</p>
+              <hr className="w-5/6 mt-1 border ml-7 text-hc-coral" />
+              <p className="text-hc-coral text-[12px] ml-[16px]">
+                비밀번호가 일치하지 않습니다.
+              </p>
             </div>
           )}
         </form>
