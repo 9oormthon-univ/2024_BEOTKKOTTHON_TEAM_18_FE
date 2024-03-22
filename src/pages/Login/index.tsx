@@ -3,20 +3,20 @@ import Input from '@/components/common/Input';
 import React, { useState } from 'react';
 
 const Login = () => {
-  const [id, setId] = useState('');
+  const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
-  const [idError, setIdError] = useState(false);
+  const [loginIdError, setLoginIdError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
   const handleLogin = () => {
-    setIdError(id === '');
+    setLoginIdError(loginId === '');
     setPasswordError(password === '');
 
-    if (id === '' || password === '') {
+    if (loginId === '' || password === '') {
       return;
     }
 
-    console.log('id : ', id);
+    console.log('loginId : ', loginId);
     console.log('password : ', password);
   };
 
@@ -34,11 +34,11 @@ const Login = () => {
           <Input
             variant="gray"
             placeholder="아이디를 입력해주세요"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-            error={idError}
+            value={loginId}
+            onChange={(e) => setLoginId(e.target.value)}
+            error={loginIdError}
           />
-          {idError && (
+          {loginIdError && (
             <div>
               <hr className="w-5/6 mt-1 ml-7 text-hc-coral" />
               <p className="mt-1 text-sm ml-7 text-hc-coral">
