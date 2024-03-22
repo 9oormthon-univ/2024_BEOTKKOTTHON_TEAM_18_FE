@@ -37,10 +37,11 @@ const Login = () => {
             value={loginId}
             onChange={(e) => setLoginId(e.target.value)}
             error={loginIdError}
+            size={'lg'}
           />
           {loginIdError && (
             <div>
-              <hr className="w-5/6 mt-1 ml-7 text-hc-coral" />
+              <hr className="w-5/6 mt-1 border ml-7 text-hc-coral" />
               <p className="mt-1 text-sm ml-7 text-hc-coral">
                 아이디를 입력해주세요!
               </p>
@@ -57,7 +58,7 @@ const Login = () => {
           />
           {passwordError && (
             <div>
-              <hr className="w-5/6 mt-1 ml-7 text-hc-coral" />
+              <hr className="w-5/6 mt-1 border ml-7 text-hc-coral" />
               <p className="mt-1 text-sm ml-7 text-hc-coral">
                 비밀번호를 입력해주세요!
               </p>
