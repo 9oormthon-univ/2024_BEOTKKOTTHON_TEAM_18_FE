@@ -2,16 +2,27 @@ import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { useState } from 'react';
 
+//TODO: @승연 헤더 회원가입으로 수정
+
 const SignUp = () => {
   const [loginId, setLoginId] = useState('');
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoginIdValid, setIsLoginIdValid] = useState(true);
+  const [isNicknameValid, setIsNicknameValid] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState(true);
 
+  //아이디 중복 확인 함수
+  const validateLoginId = () => {};
+
+  //닉네임 중복 확인 함수
+  const validateNickname = () => {};
+
+  //비밀번호 유효성 검사 함수
   const validatePassword = () => {
     const passwordRegex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z!@#$%^&*]{8,}$/;
     return passwordRegex.test(password);
   };
 
@@ -56,6 +67,7 @@ const SignUp = () => {
               variant="primary"
               size="sm"
               children="중복확인"
+              onClick={validateLoginId}
             />
           </div>
 
@@ -74,6 +86,7 @@ const SignUp = () => {
               variant="primary"
               size="sm"
               children="중복확인"
+              onClick={validateNickname}
             />
           </div>
 
@@ -84,7 +97,6 @@ const SignUp = () => {
             variant="white"
             placeholder="영어, 특수문자 포함 8자리 이상"
             size="lg"
-            type="password"
             value={password}
             onChange={handlePasswordChange}
           />
