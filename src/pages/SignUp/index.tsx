@@ -3,6 +3,8 @@ import Input from '@/components/common/Input';
 import { useState } from 'react';
 
 const SignUp = () => {
+  const [loginId, setLoginId] = useState('');
+  const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -30,6 +32,9 @@ const SignUp = () => {
       alert('비밀번호가 일치하지 않습니다.');
       return;
     }
+    console.log('nickname : ', nickname);
+    console.log('loginId : ', loginId);
+    console.log('password : ', password);
   };
 
   return (
@@ -44,6 +49,8 @@ const SignUp = () => {
               variant="white"
               size="sm"
               type="text"
+              value={loginId}
+              onChange={(e) => setLoginId(e.target.value)}
             />
             <Button
               variant="primary"
@@ -60,6 +67,8 @@ const SignUp = () => {
               variant="white"
               size="sm"
               type="text"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
             />
             <Button
               variant="primary"
