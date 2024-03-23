@@ -18,7 +18,7 @@ const Input = React.forwardRef(
     return (
       <input
         className={cn(
-          'w-[338px] h-[54px] rounded-3xl border-2 border-hc-grayLight focus:outline-none text-sm font-semibold px-6 py-2.5 mt-5',
+          'w-[338px] h-[54px] rounded-3xl border-2 border-hc-grayLight focus:outline-none text-sm font-semibold px-6 py-2.5 mt-[5px]',
 
           inputVariant[variant],
 
