@@ -4,8 +4,6 @@ import CommentButtonIcon from '@/components/icons/CommentButtonIcon.tsx';
 
 interface InputProps extends ComponentPropsWithoutRef<'input'> {
   variant: 'gray' | 'white';
-  error?: boolean;
-  className?: string;
   hasCommentButton?: boolean;
 }
 

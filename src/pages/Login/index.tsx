@@ -1,23 +1,27 @@
+import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import React, { useState } from 'react';
 
 const Login = () => {
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [idError, setIdError] = useState(false);
+  const idRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const [loginIdError, setLoginIdError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
   const handleLogin = () => {
-    setIdError(id === '');
-    setPasswordError(password === '');
-
-    if (id === '' || password === '') {
-      return;
+    if (idRef.current && !idRef.current.value) {
+      setLoginIdError(idRef.current.value === '');
     }
 
-    console.log('id : ', id);
-    console.log('password : ', password);
+    if (passwordRef.current && !passwordRef.current.value) {
+      setPasswordError(passwordRef.current.value === '');
+    }
+
+    console.log('loginId : ', idRef.current?.value);
+    console.log('password : ', passwordRef.current?.value);
   };
 
   return (
@@ -31,56 +35,58 @@ const Login = () => {
           alt="login-logo"
         />
         <form className={'flex flex-col mt-10'}>
-          <Input
-            variant="gray"
-            placeholder="아이디를 입력해주세요"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-            error={idError}
-          />
-          {idError && (
-            <div>
-              <hr className="w-5/6 mt-1 ml-7 text-hc-coral" />
-              <p className="mt-1 text-sm ml-7 text-hc-coral">
-                아이디를 입력해주세요!
-              </p>
-            </div>
-          )}
+          <div className="mb-[20px]">
+            <Input
+              variant="gray"
+              placeholder="아이디를 입력해주세요"
+              ref={idRef}
+            />
+            {loginIdError && (
+              <div>
+                <hr className="w-5/6 mt-1 border ml-7 text-hc-coral" />
+                <p className="mt-1 text-sm ml-7 text-hc-coral">
+                  아이디를 입력해주세요!
+                </p>
+              </div>
+            )}
+          </div>
 
-          <Input
-            variant="gray"
-            placeholder="비밀번호를 입력해주세요"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={passwordError}
-          />
-          {passwordError && (
-            <div>
-              <hr className="w-5/6 mt-1 ml-7 text-hc-coral" />
-              <p className="mt-1 text-sm ml-7 text-hc-coral">
-                비밀번호를 입력해주세요!
-              </p>
-            </div>
-          )}
+          <div className="mb-[20px]">
+            <Input
+              variant="gray"
+              placeholder="비밀번호를 입력해주세요"
+              type="password"
+              ref={passwordRef}
+            />
+            {passwordError && (
+              <div>
+                <hr className="w-5/6 mt-1 border ml-7 text-hc-coral" />
+                <p className="mt-1 text-sm ml-7 text-hc-coral">
+                  비밀번호를 입력해주세요!
+                </p>
+              </div>
+            )}
+          </div>
         </form>
 
         <Button
           variant="primary"
           size="lg"
-          onClick={handleLogin}
-          children="로그인"
-        />
+          onClick={handleLogin}>
+          로그인
+        </Button>
 
-        <p className={'mt-5 text-hc-grayDark text-xs'}>
+        <p className={'mt-5 text-hc-grayDark text-xs flex'}>
           아직 회원가입을 안하셨나요?
-          <a
-            href="/signup"
-            className={
-              'ml-2 underline hover:text-hc-blue hover:font-semibold underline-offset-4'
-            }>
-            회원가입
-          </a>
+          <p>
+            <Link
+              to="/users/signup"
+              className={
+                'underline hover:text-hc-blue hover:font-semibold underline-offset-4 ml-2'
+              }>
+              회원가입
+            </Link>
+          </p>
         </p>
       </div>
     </div>
