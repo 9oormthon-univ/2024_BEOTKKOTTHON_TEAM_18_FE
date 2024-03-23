@@ -6,9 +6,12 @@ import { useLocation } from 'react-router-dom';
 import { footerLabelPathInfo } from '@/constants/footerLabelPathInfo.ts';
 import { blueDarkHex, grayDarkHex } from '@/constants';
 import NotificationIcon from '@/components/icons/NotificationIcon.tsx';
+import tokenStore from '@/store/tokenStore.ts';
+import LoginAlertDialog from '@/components/common/LoginAlertDialog.tsx';
 
 const Footer = () => {
   const location = useLocation();
+  const { token } = tokenStore();
 
   return (
     <footer
@@ -55,19 +58,40 @@ const Footer = () => {
         label={'띱추가'}
         path={'/ddeep/create'}
       />
-      <FooterElement
-        icon={
-          <UserIcon
-            stroke={
-              location.pathname === footerLabelPathInfo['myPage'].path
-                ? blueDarkHex
-                : grayDarkHex
-            }
-          />
-        }
-        label={'마이페이지'}
-        path={'/mypage'}
-      />
+      {token ? (
+        <FooterElement
+          icon={
+            <UserIcon
+              stroke={
+                location.pathname === footerLabelPathInfo['myPage'].path
+                  ? blueDarkHex
+                  : grayDarkHex
+              }
+            />
+          }
+          label={'마이페이지'}
+          path={'/mypage'}
+        />
+      ) : (
+        <LoginAlertDialog
+          trigger={
+            <FooterElement
+              icon={
+                <UserIcon
+                  stroke={
+                    location.pathname === footerLabelPathInfo['myPage'].path
+                      ? blueDarkHex
+                      : grayDarkHex
+                  }
+                />
+              }
+              label={'마이페이지'}
+              path={'/mypage'}
+              disabled={true}
+            />
+          }
+        />
+      )}
     </footer>
   );
 };

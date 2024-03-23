@@ -95,6 +95,10 @@ const PageRouter = () => {
           element={<DdeepMoreRecruiting />}
         />
       </Route>
+      <Route
+        element={<Login />}
+        path={'/users/login'}
+      />
     </Routes>
   );
 };

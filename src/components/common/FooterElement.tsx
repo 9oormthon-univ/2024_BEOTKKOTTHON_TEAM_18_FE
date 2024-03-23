@@ -4,13 +4,17 @@ interface FooterElementProps {
   icon: React.ReactNode;
   label: string;
   path: string;
+  disabled?: boolean;
 }
 
-const FooterElement = ({ icon, label, path }: FooterElementProps) => {
+const FooterElement = ({ icon, label, path, disabled }: FooterElementProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleMoveToPath = () => {
+    if (disabled) {
+      return;
+    }
     navigate(path);
   };
   return (

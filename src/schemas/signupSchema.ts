@@ -12,7 +12,7 @@ export const isSingupValidSchema = z
       }),
     checkPassword: z.string()
   })
-  .refine((data) => data.password !== data.checkPassword, {
+  .refine((data) => data.password === data.checkPassword, {
     path: ['checkPassword'],
     message: '비밀번호가 일치하지 않습니다.'
   });
