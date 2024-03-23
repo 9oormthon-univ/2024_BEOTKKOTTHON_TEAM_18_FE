@@ -53,7 +53,7 @@ const Login = () => {
           'w-[390px] h-dvh flex flex-col items-center justify-center mb-40'
         }>
         <img
-          src="/public/assets/images/loginLogo.png"
+          src="/assets/images/loginLogo.png"
           alt="login-logo"
         />
         <form className={'flex flex-col mt-10'}>
