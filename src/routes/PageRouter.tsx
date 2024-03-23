@@ -36,12 +36,12 @@ const PageRouter = () => {
           element={<DdeepDetail />}
         />
         <Route
-          path={'/signup'}
+          path={'/users/signup'}
           element={<SignUp />}
         />
       </Route>
       <Route
-        path="/login"
+        path="/users/login"
         element={<Login />}
       />
     </Routes>
