@@ -3,11 +3,12 @@ import { cn } from '@/lib/utils.ts';
 
 interface InputProps extends ComponentPropsWithoutRef<'input'> {
   variant: 'gray' | 'white';
+  width?: string;
 }
 
 const Input = React.forwardRef(
   (
-    { variant, ...otherProps }: InputProps,
+    { variant, width, className, ...otherProps }: InputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const inputVariant = {
@@ -20,7 +21,9 @@ const Input = React.forwardRef(
         className={cn(
           'w-[338px] h-[54px] rounded-3xl border-2 border-hc-grayLight focus:outline-none text-sm font-semibold px-6 py-2.5 mt-5',
 
-          inputVariant[variant]
+          inputVariant[variant],
+          width,
+          className
         )}
         {...otherProps}
         ref={ref}
