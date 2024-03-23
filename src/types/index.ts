@@ -18,6 +18,16 @@ type Comment = {
   content: string;
 };
 
+export type Notification = {
+  notificationIdx: number;
+  name: string;
+  contactUrl: string;
+  leader: string;
+  participantNumber: number;
+  participantLimit: number;
+  description: string;
+};
+
 export interface DdeepDetail {
   recruitment: {
     recruitmentIdx: number;

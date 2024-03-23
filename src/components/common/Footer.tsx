@@ -8,10 +8,21 @@ import { blueDarkHex, grayDarkHex } from '@/constants';
 import NotificationIcon from '@/components/icons/NotificationIcon.tsx';
 import tokenStore from '@/store/tokenStore.ts';
 import LoginAlertDialog from '@/components/common/LoginAlertDialog.tsx';
+import { useQuery } from '@tanstack/react-query';
+import getNotificationList from '@/apis/getNotificationList.ts';
+import { useEffect } from 'react';
 
 const Footer = () => {
   const location = useLocation();
   const { token } = tokenStore();
+  const { data, refetch } = useQuery({
+    queryKey: ['notification'],
+    queryFn: getNotificationList
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [location.pathname, refetch]);
 
   return (
     <footer
@@ -40,7 +51,9 @@ const Footer = () => {
                   ? blueDarkHex
                   : grayDarkHex
               }
-              unread="true"
+              unread={
+                data?.result.notificationList.length > 0 ? 'true' : 'false'
+              }
             />
           }
           label={'알림'}
