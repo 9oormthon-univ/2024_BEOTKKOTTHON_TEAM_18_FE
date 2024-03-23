@@ -7,7 +7,7 @@ const checkNicknameValid = async (nickname: string) => {
     });
     return res.data;
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 };
 

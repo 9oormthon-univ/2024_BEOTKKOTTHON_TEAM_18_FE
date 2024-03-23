@@ -11,7 +11,7 @@ const postSignup = async (data: SignupData) => {
     const res = await baseInstance.post('/users/signup', data);
     return res.data;
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 };
 

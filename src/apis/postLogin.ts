@@ -10,7 +10,7 @@ const postLogin = async (data: LoginData) => {
     const res = await baseInstance.post('/users/login', data);
     return res.data;
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 };
 

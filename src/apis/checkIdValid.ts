@@ -5,7 +5,7 @@ const checkIdValid = async (id: string) => {
     const res = await baseInstance.post('users/loginId', { loginId: id });
     return res.data;
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 };
 
