@@ -36,7 +36,7 @@ const Footer = () => {
                 ? blueDarkHex
                 : grayDarkHex
             }
-            hasNew={true}
+            unread="true"
           />
         }
         label={'알림'}

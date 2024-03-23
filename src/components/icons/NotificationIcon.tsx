@@ -1,11 +1,13 @@
 import { SVGProps } from 'react';
 
 const SvgNotificationIcon = (
-  props: SVGProps<SVGSVGElement> & { hasNew: boolean }
+  props: SVGProps<SVGSVGElement> & { unread: string }
 ) => (
   <div className={'relative'}>
     <div className={'absolute -top-1 -right-1'}>
-      {props.hasNew && <div className={'w-2 h-2 bg-hc-coral rounded-full'} />}
+      {props.unread === 'true' && (
+        <div className={'w-2 h-2 bg-hc-coral rounded-full'} />
+      )}
     </div>
     <svg
       xmlns="http://www.w3.org/2000/svg"
