@@ -5,11 +5,18 @@ import CommentButtonIcon from '@/components/icons/CommentButtonIcon.tsx';
 interface InputProps extends ComponentPropsWithoutRef<'input'> {
   variant: 'gray' | 'white';
   hasCommentButton?: boolean;
+  submithandler?: () => void;
 }
 
 const Input = React.forwardRef(
   (
-    { variant, className, hasCommentButton, ...otherProps }: InputProps,
+    {
+      variant,
+      className,
+      hasCommentButton,
+      submithandler,
+      ...otherProps
+    }: InputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const inputVariant = {
@@ -33,6 +40,7 @@ const Input = React.forwardRef(
             width={16}
             height={14}
             className={'absolute top-1/2 right-4 cursor-pointer'}
+            onClick={submithandler}
           />
         )}
       </div>
