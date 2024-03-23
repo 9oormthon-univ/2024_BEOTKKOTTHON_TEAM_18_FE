@@ -1,6 +1,7 @@
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [loginId, setLoginId] = useState('');
@@ -37,8 +38,6 @@ const Login = () => {
               placeholder="아이디를 입력해주세요"
               value={loginId}
               onChange={(e) => setLoginId(e.target.value)}
-              error={loginIdError}
-              size={'lg'}
             />
             {loginIdError && (
               <div>
@@ -76,15 +75,17 @@ const Login = () => {
           로그인
         </Button>
 
-        <p className={'mt-5 text-hc-grayDark text-xs'}>
+        <p className={'mt-5 text-hc-grayDark text-xs flex'}>
           아직 회원가입을 안하셨나요?
-          <a
-            href="/users/signup"
-            className={
-              'ml-2 underline hover:text-hc-blue hover:font-semibold underline-offset-4'
-            }>
-            회원가입
-          </a>
+          <p>
+            <Link
+              to="/users/signup"
+              className={
+                'underline hover:text-hc-blue hover:font-semibold underline-offset-4 ml-2'
+              }>
+              회원가입
+            </Link>
+          </p>
         </p>
       </div>
     </div>
