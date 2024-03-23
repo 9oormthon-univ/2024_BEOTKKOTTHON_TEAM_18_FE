@@ -20,7 +20,7 @@ const HFLayout = ({ headerVariant, backPath, headerTitle }: HFLayoutProps) => {
       ) : (
         <Header />
       )}
-      <main className={'h-[calc(100dvh-118px)]'}>
+      <main className={'h-[calc(100dvh-118px)] overflow-scroll scrollbar-hide'}>
         <Outlet />
       </main>
       <Footer />

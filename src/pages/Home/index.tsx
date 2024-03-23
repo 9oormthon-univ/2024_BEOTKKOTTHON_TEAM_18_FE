@@ -11,6 +11,7 @@ const Home = () => {
         <SectionHeader
           title={'모집중인 띱'}
           hasMoreDetails={true}
+          showMorePath={'/ddeep/more/recruiting'}
         />
         <RecruitingCarousel />
       </section>
@@ -18,6 +19,7 @@ const Home = () => {
         <SectionHeader
           title={'참여중인 띱'}
           hasMoreDetails={true}
+          showMorePath={'/ddeep/more/participating'}
         />
         <ParticipatingCarousel />
       </section>

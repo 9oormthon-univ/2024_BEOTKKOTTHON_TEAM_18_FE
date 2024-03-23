@@ -8,6 +8,8 @@ import DdeepCreate from '@/pages/Ddeep/DdeepCreate.tsx';
 import DdeepDetail from '@/pages/Ddeep/DdeepDetail.tsx';
 import Message from '@/pages/Message';
 import MyPage from '@/pages/MyPage';
+import DdeepMoreParticipating from '@/pages/Ddeep/DdeepMoreParticipating.tsx';
+import DdeepMoreRecruiting from '@/pages/Ddeep/DdeepMoreRecruiting.tsx';
 
 const PageRouter = () => {
   return (
@@ -30,7 +32,14 @@ const PageRouter = () => {
           element={<MyPage />}
         />
       </Route>
-      <Route element={<HLayout />}>
+      <Route
+        element={
+          <HLayout
+            headerVariant={'back'}
+            backPath={'/'}
+            headerTitle={'모집중인 띱'}
+          />
+        }>
         <Route
           path={'/ddeep/:id'}
           element={<DdeepDetail />}
@@ -52,9 +61,31 @@ const PageRouter = () => {
       </Route>
 
       <Route
-        path="/users/login"
-        element={<Login />}
-      />
+        element={
+          <HLayout
+            headerVariant={'back'}
+            headerTitle={'참여중인 띱'}
+            backPath={'/'}
+          />
+        }>
+        <Route
+          path={'/ddeep/more/participating'}
+          element={<DdeepMoreParticipating />}
+        />
+      </Route>
+      <Route
+        element={
+          <HLayout
+            headerVariant={'back'}
+            headerTitle={'모집중인 띱'}
+            backPath={'/'}
+          />
+        }>
+        <Route
+          path={'/ddeep/more/recruiting'}
+          element={<DdeepMoreRecruiting />}
+        />
+      </Route>
     </Routes>
   );
 };
