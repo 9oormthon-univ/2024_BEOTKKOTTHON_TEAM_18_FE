@@ -8,15 +8,19 @@ import getHomeRecruitingDdeep from '@/apis/getHomeRecruitingDdeep.ts';
 import getHomeParticipatingDdeep from '@/apis/getHomeParticipatingDdeep.ts';
 
 const Home = () => {
-  const { data: homeRecruitingDdeepData, error: homeRecruitingDdeepError } =
-    useSuspenseQuery({
-      queryKey: ['homeRecruitingDdeep'],
-      queryFn: getHomeRecruitingDdeep
-    });
+  const {
+    data: homeRecruitingDdeepData,
+    error: homeRecruitingDdeepError,
+    refetch: homeRecruitingDdeepRefetch
+  } = useSuspenseQuery({
+    queryKey: ['homeRecruitingDdeep'],
+    queryFn: getHomeRecruitingDdeep
+  });
 
   const {
     data: homeParticipatingDdeepData,
-    error: homeParticipatingDdeepError
+    error: homeParticipatingDdeepError,
+    refetch: homeParticipatingDdeepRefetch
   } = useSuspenseQuery({
     queryKey: ['homeParticipatingDdeep'],
     queryFn: getHomeParticipatingDdeep
@@ -33,6 +37,7 @@ const Home = () => {
         {homeRecruitingDdeepData.result.recruitmentList.length !== 0 && (
           <RecruitingCarousel
             data={homeRecruitingDdeepData.result.recruitmentList}
+            refetch={homeRecruitingDdeepRefetch}
           />
         )}
         {homeRecruitingDdeepError && (
@@ -48,6 +53,7 @@ const Home = () => {
         {homeParticipatingDdeepData.result.recruitmentList.length !== 0 ? (
           <ParticipatingCarousel
             data={homeParticipatingDdeepData.result.recruitmentList}
+            refetch={homeParticipatingDdeepRefetch}
           />
         ) : (
           <div className={'p-4 flex justify-center'}>

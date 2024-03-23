@@ -9,12 +9,30 @@ import { Badge } from '@/components/ui/badge.tsx';
 import { RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button.tsx';
 import { DdeepInfo } from '@/types';
+import leaveDdeep from '@/apis/leaveDdeep.ts';
+import { toast } from 'sonner';
 
 interface ParticipatingCarouselProps {
   data: DdeepInfo[];
+  refetch: () => void;
 }
 
-const ParticipatingCarousel = ({ data }: ParticipatingCarouselProps) => {
+const ParticipatingCarousel = ({
+  data,
+  refetch
+}: ParticipatingCarouselProps) => {
+  const handleLeaveDdeep = async (id: string) => {
+    const res = await leaveDdeep(id);
+    if (res.isSuccess === true) {
+      toast.success('띱 탈퇴에 성공했습니다!');
+      refetch();
+    }
+    if (!res.isSuccess) {
+      toast.error('띱 탈퇴에 실패했습니다!');
+      refetch();
+    }
+  };
+
   return (
     <Carousel className={'w-full max-w-sm'}>
       <CarouselContent className={'w-full mx-auto'}>
@@ -75,14 +93,36 @@ const ParticipatingCarousel = ({ data }: ParticipatingCarouselProps) => {
                     </div>
                   </div>
                 </div>
-                <div className={'w-full flex justify-end mt-1'}>
-                  <Button
-                    className={
-                      'w-[75px] h-[30px] bg-hc-blue-300 text-hc-white text-[12px] rounded-[12px]'
-                    }>
-                    나가기
-                  </Button>
-                </div>
+                {!ddeep.isLeader ? (
+                  <div className={'w-full flex justify-end mt-1'}>
+                    <Button
+                      className={
+                        'w-[75px] h-[30px] bg-hc-blue-300 text-hc-white text-[12px] rounded-[12px]'
+                      }
+                      onClick={() =>
+                        handleLeaveDdeep(ddeep.recruitmentIdx.toString())
+                      }>
+                      나가기
+                    </Button>
+                  </div>
+                ) : (
+                  <div className={'w-full flex justify-end mt-1 gap-x-1'}>
+                    <Button
+                      className={
+                        'w-[75px] h-[30px] bg-hc-white border-[1px] border-hc-blue-300 text-hc-blue-300 text-[12px] rounded-[12px]'
+                      }
+                      onClick={() => {}}>
+                      모집취소
+                    </Button>
+                    <Button
+                      className={
+                        'w-[75px] h-[30px] bg-hc-blue-300 text-hc-white text-[12px] rounded-[12px]'
+                      }
+                      onClick={() => {}}>
+                      모집완료
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </CarouselItem>

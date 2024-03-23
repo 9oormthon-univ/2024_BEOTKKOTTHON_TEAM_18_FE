@@ -14,20 +14,22 @@ import { toast } from 'sonner';
 
 interface RecruitingCarouselProps {
   data: DdeepInfo[];
+  refetch: () => void;
 }
 
-const handleEnterDdeep = async (id: string) => {
-  const res = await enterDdeep(id);
-  if (res.isSuccess === true) {
-    toast.success('띱 참여에 성공했습니다!');
-  }
-  if (!res.isSuccess) {
-    toast.error('띱 참여에 실패했습니다!');
-  }
-};
-
-const RecruitingCarousel = ({ data }: RecruitingCarouselProps) => {
+const RecruitingCarousel = ({ data, refetch }: RecruitingCarouselProps) => {
   const navigate = useNavigate();
+  const handleEnterDdeep = async (id: string) => {
+    const res = await enterDdeep(id);
+    if (res.isSuccess === true) {
+      toast.success('띱 참여에 성공했습니다!');
+      refetch();
+    }
+    if (!res.isSuccess) {
+      toast.error('띱 참여에 실패했습니다!');
+      refetch();
+    }
+  };
   return (
     <Carousel className={'w-full max-w-sm'}>
       <CarouselContent className={'w-full mx-auto'}>
@@ -90,17 +92,19 @@ const RecruitingCarousel = ({ data }: RecruitingCarouselProps) => {
                     </div>
                   </div>
                 </div>
-                <div className={'w-full flex justify-end mt-1'}>
-                  <Button
-                    className={
-                      'w-[45px] h-[18px] bg-hc-blue-300 text-hc-white text-[8px] rounded-[12px]'
-                    }
-                    onClick={() =>
-                      handleEnterDdeep(ddeep.recruitmentIdx.toString())
-                    }>
-                    참여하기
-                  </Button>
-                </div>
+                {!ddeep.isLeader && (
+                  <div className={'w-full flex justify-end mt-1'}>
+                    <Button
+                      className={
+                        'w-[45px] h-[18px] bg-hc-blue-300 text-hc-white text-[8px] rounded-[12px]'
+                      }
+                      onClick={() =>
+                        handleEnterDdeep(ddeep.recruitmentIdx.toString())
+                      }>
+                      참여하기
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </CarouselItem>
