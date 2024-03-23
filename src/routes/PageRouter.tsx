@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
+import SignUp from '@/pages/SignUp';
 import HFLayout from '@/routes/HFLayout.tsx';
 import HLayout from '@/routes/HLayout.tsx';
 import DdeepCreate from '@/pages/Ddeep/DdeepCreate.tsx';
@@ -13,20 +14,11 @@ import Notification from '@/pages/Notification';
 const PageRouter = () => {
   return (
     <Routes>
-      <Route element={<HFLayout headerVariant={'default'} />}>
+      <Route element={<HFLayout />}>
         <Route
           path="/"
           element={<Home />}
         />
-      </Route>
-      <Route
-        element={
-          <HFLayout
-            headerVariant={'back'}
-            backPath={'/'}
-            headerTitle={'띱 만들기'}
-          />
-        }>
         <Route
           path={'/ddeep/create'}
           element={<DdeepCreate />}
@@ -44,15 +36,6 @@ const PageRouter = () => {
           path={'/notification'}
           element={<Notification />}
         />
-      </Route>
-      <Route
-        element={
-          <HFLayout
-            headerVariant={'back'}
-            backPath={'/'}
-            headerTitle={'마이페이지'}
-          />
-        }>
         <Route
           path={'/mypage'}
           element={<MyPage />}
@@ -71,6 +54,21 @@ const PageRouter = () => {
           element={<DdeepDetail />}
         />
       </Route>
+
+      <Route
+        element={
+          <HLayout
+            headerVariant={'back'}
+            backPath={'/users/login'}
+            headerTitle={'회원가입'}
+          />
+        }>
+        <Route
+          path={'/users/signup'}
+          element={<SignUp />}
+        />
+      </Route>
+
       <Route
         element={
           <HLayout
@@ -97,10 +95,6 @@ const PageRouter = () => {
           element={<DdeepMoreRecruiting />}
         />
       </Route>
-      <Route
-        path="/login"
-        element={<Login />}
-      />
     </Routes>
   );
 };

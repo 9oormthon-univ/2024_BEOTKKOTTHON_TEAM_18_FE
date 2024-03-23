@@ -7,13 +7,20 @@ interface ButtonProps extends React.ComponentProps<'button'> {
   children: React.ReactNode;
 }
 
-const Button = ({ variant, size, children, ...otherProps }: ButtonProps) => {
+const Button = ({
+  variant,
+  size,
+
+  className,
+  children,
+  ...otherProps
+}: ButtonProps) => {
   const buttonType = {
     primary: 'bg-hc-blue text-hc-white',
     secondary: 'bg-gray-500'
   };
   const buttonSize = {
-    sm: 'px-4 py-2 text-sm',
+    sm: 'w-[89px] px-4 py-2 text-sm',
     md: 'px-8 py-3 text-base',
     lg: 'px-12 py-4 text-lg'
   };
@@ -21,9 +28,11 @@ const Button = ({ variant, size, children, ...otherProps }: ButtonProps) => {
     <button
       {...otherProps}
       className={cn(
-        'text-lg font-semibold text-white bg-blue-500 rounded-3xl focus:outline-none w-[338px] h-[54px] flex items-center justify-center mt-5 hover:bg-hc-blue-300',
+        'text-lg font-semibold text-white bg-blue-500 rounded-3xl focus:outline-none w-[338px] h-[54px] flex items-center justify-center mt-[5px] hover:bg-hc-blue-300',
         buttonType[variant],
-        buttonSize[size]
+        buttonSize[size],
+
+        className
       )}>
       {children}
     </button>
