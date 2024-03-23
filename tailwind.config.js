@@ -17,6 +17,7 @@ module.exports = {
       'hc-blue-darker': '#003CD2',
       'hc-white': '#FFFFFF',
       'hc-black': '#000000',
+      'hc-grayLighter': '#F5F6F8',
       'hc-grayLight': '#EEEEEE',
       'hc-gray': '#D9D9D9',
       'hc-grayDark': '#585858',
@@ -50,5 +51,5 @@ module.exports = {
       }
     }
   },
-  plugins: [require('tailwindcss-animate')]
+  plugins: [require('tailwindcss-animate'), require('tailwind-scrollbar-hide')]
 };

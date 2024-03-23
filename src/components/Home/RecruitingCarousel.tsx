@@ -7,8 +7,10 @@ import {
 import { Card, CardContent } from '@/components/ui/card.tsx';
 import { Badge } from '@/components/ui/badge.tsx';
 import { Button } from '@/components/ui/button.tsx';
+import { useNavigate } from 'react-router-dom';
 
 const RecruitingCarousel = () => {
+  const navigate = useNavigate();
   return (
     <Carousel className={'w-full max-w-sm'}>
       <CarouselContent className={'w-full mx-auto'}>
@@ -38,7 +40,8 @@ const RecruitingCarousel = () => {
                   <div
                     className={
                       'text-[8px] text-hc-grayDark cursor-pointer underline'
-                    }>
+                    }
+                    onClick={() => navigate('/ddeep/123')}>
                     상세보기
                   </div>
                 </div>
