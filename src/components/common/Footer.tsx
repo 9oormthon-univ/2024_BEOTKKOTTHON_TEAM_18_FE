@@ -31,33 +31,78 @@ const Footer = () => {
         label={footerLabelPathInfo['home'].label}
         path={footerLabelPathInfo['home'].path}
       />
-      <FooterElement
-        icon={
-          <NotificationIcon
-            fill={
-              location.pathname === footerLabelPathInfo['notification'].path
-                ? blueDarkHex
-                : grayDarkHex
-            }
-            unread="true"
-          />
-        }
-        label={'알림'}
-        path={'/notification'}
-      />
-      <FooterElement
-        icon={
-          <CirclePlusIcon
-            fill={
-              location.pathname === footerLabelPathInfo['ddeepCreate'].path
-                ? blueDarkHex
-                : grayDarkHex
-            }
-          />
-        }
-        label={'띱추가'}
-        path={'/ddeep/create'}
-      />
+      {token ? (
+        <FooterElement
+          icon={
+            <NotificationIcon
+              fill={
+                location.pathname === footerLabelPathInfo['notification'].path
+                  ? blueDarkHex
+                  : grayDarkHex
+              }
+              unread="true"
+            />
+          }
+          label={'알림'}
+          path={'/notification'}
+        />
+      ) : (
+        <LoginAlertDialog
+          trigger={
+            <FooterElement
+              icon={
+                <NotificationIcon
+                  fill={
+                    location.pathname ===
+                    footerLabelPathInfo['notification'].path
+                      ? blueDarkHex
+                      : grayDarkHex
+                  }
+                  unread="true"
+                />
+              }
+              label={'알림'}
+              path={'/notification'}
+              disabled={true}
+            />
+          }
+        />
+      )}
+      {token ? (
+        <FooterElement
+          icon={
+            <CirclePlusIcon
+              fill={
+                location.pathname === footerLabelPathInfo['ddeepCreate'].path
+                  ? blueDarkHex
+                  : grayDarkHex
+              }
+            />
+          }
+          label={'띱추가'}
+          path={'/ddeep/create'}
+        />
+      ) : (
+        <LoginAlertDialog
+          trigger={
+            <FooterElement
+              icon={
+                <CirclePlusIcon
+                  fill={
+                    location.pathname ===
+                    footerLabelPathInfo['ddeepCreate'].path
+                      ? blueDarkHex
+                      : grayDarkHex
+                  }
+                />
+              }
+              label={'띱추가'}
+              path={'/ddeep/create'}
+              disabled={true}
+            />
+          }
+        />
+      )}
       {token ? (
         <FooterElement
           icon={
