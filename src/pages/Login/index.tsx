@@ -57,8 +57,6 @@ const Login = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              error={passwordError}
-              size="lg"
             />
             {passwordError && (
               <div>
@@ -74,14 +72,14 @@ const Login = () => {
         <Button
           variant="primary"
           size="lg"
-          onClick={handleLogin}
-          children="로그인"
-        />
+          onClick={handleLogin}>
+          로그인
+        </Button>
 
         <p className={'mt-5 text-hc-grayDark text-xs'}>
           아직 회원가입을 안하셨나요?
           <a
-            href="/login/signup"
+            href="/users/signup"
             className={
               'ml-2 underline hover:text-hc-blue hover:font-semibold underline-offset-4'
             }>
