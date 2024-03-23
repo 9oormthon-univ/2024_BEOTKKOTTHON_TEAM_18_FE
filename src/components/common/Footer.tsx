@@ -32,14 +32,14 @@ const Footer = () => {
         icon={
           <MessageIcon
             stroke={
-              location.pathname === footerLabelPathInfo['message'].path
+              location.pathname === footerLabelPathInfo['notification'].path
                 ? blueDarkHex
                 : grayDarkHex
             }
           />
         }
-        label={'메세지'}
-        path={'/message'}
+        label={'알림'}
+        path={'/notification'}
       />
       <FooterElement
         icon={
