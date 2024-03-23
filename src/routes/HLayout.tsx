@@ -19,7 +19,7 @@ const HLayout = ({ headerVariant, backPath, headerTitle }: HLayoutProps) => {
       ) : (
         <Header />
       )}
-      <main>
+      <main className={'h-[calc(100dvh-53px)] overflow-scroll scrollbar-hide'}>
         <Outlet />
       </main>
     </div>
