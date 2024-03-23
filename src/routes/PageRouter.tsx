@@ -59,7 +59,14 @@ const PageRouter = () => {
           element={<MyPage />}
         />
       </Route>
-      <Route element={<HLayout />}>
+      <Route
+        element={
+          <HLayout
+            headerVariant={'back'}
+            backPath={'/'}
+            headerTitle={'모집중인 띱'}
+          />
+        }>
         <Route
           path={'/ddeep/:id'}
           element={<DdeepDetail />}
