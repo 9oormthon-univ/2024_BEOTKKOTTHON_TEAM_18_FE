@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button.tsx';
 import { DdeepInfo } from '@/types';
 import leaveDdeep from '@/apis/leaveDdeep.ts';
 import { toast } from 'sonner';
+import cancelDdeep from '@/apis/cancelDdeep.ts';
+import doneDdeep from '@/apis/doneDdeep.ts';
 
 interface ParticipatingCarouselProps {
   data: DdeepInfo[];
@@ -29,6 +31,30 @@ const ParticipatingCarousel = ({
     }
     if (!res.isSuccess) {
       toast.error('띱 탈퇴에 실패했습니다!');
+      refetch();
+    }
+  };
+
+  const handleCancelDdeep = async (id: string) => {
+    const res = await cancelDdeep(id);
+    if (res.isSuccess === true) {
+      toast.success('띱 모집이 취소되었습니다!');
+      refetch();
+    }
+    if (res.isSuccess === false) {
+      toast.error('띱 모집 취소에 실패했습니다!');
+      refetch();
+    }
+  };
+
+  const handleDoneDdeep = async (id: string) => {
+    const res = await doneDdeep(id);
+    if (res.isSuccess === true) {
+      toast.success('띱 모집을 완료했습니다!');
+      refetch();
+    }
+    if (res.isSuccess === false) {
+      toast.error('띱 모집을 완료하는 데 실패했습니다!');
       refetch();
     }
   };
@@ -111,14 +137,18 @@ const ParticipatingCarousel = ({
                       className={
                         'w-[75px] h-[30px] bg-hc-white border-[1px] border-hc-blue-300 text-hc-blue-300 text-[12px] rounded-[12px]'
                       }
-                      onClick={() => {}}>
+                      onClick={() =>
+                        handleCancelDdeep(ddeep.recruitmentIdx.toString())
+                      }>
                       모집취소
                     </Button>
                     <Button
                       className={
                         'w-[75px] h-[30px] bg-hc-blue-300 text-hc-white text-[12px] rounded-[12px]'
                       }
-                      onClick={() => {}}>
+                      onClick={() =>
+                        handleDoneDdeep(ddeep.recruitmentIdx.toString())
+                      }>
                       모집완료
                     </Button>
                   </div>
