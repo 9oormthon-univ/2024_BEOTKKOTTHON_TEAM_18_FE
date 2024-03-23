@@ -24,6 +24,10 @@ const PageRouter = () => {
           path={'/ddeep/create'}
           element={<DdeepCreate />}
         />
+        <Route
+          path={'/mypage'}
+          element={<MyPage />}
+        />
       </Route>
       <Route
         element={
@@ -36,10 +40,6 @@ const PageRouter = () => {
         <Route
           path={'/notification'}
           element={<Notification />}
-        />
-        <Route
-          path={'/mypage'}
-          element={<MyPage />}
         />
       </Route>
       <Route
