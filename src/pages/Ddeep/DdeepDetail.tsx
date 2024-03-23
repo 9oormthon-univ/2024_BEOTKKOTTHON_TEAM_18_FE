@@ -66,7 +66,9 @@ const DdeepDetail = () => {
         </CardContent>
       </Card>
       <div className={'w-full flex justify-start mt-2 ml-8 items-center'}>
-        <div className={'text-[14px] text-hc-blue-darker'}>댓글 (1)</div>
+        <div className={'text-[14px] font-semibold text-hc-blue-darker'}>
+          댓글 (1)
+        </div>
       </div>
       <Input
         variant={'gray'}
