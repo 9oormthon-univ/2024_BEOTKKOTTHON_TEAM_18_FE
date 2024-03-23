@@ -1,5 +1,8 @@
 # 헤쳐모여! - 중∙고등학생 대상 파티 모집 서비스
 
+<img src="https://github.com/goormthon-Univ/2024_BEOTKKOTTHON_TEAM_18_FE/assets/125551867/9a2f517a-1735-4e5b-b80d-b3be87ff2d4f" width="800">
+
+
 ## 👨‍👩‍👧‍👦 Developers
 
 |Frontend|Frontend| 
