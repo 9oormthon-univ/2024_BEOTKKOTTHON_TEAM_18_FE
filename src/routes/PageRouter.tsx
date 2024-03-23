@@ -6,10 +6,10 @@ import HFLayout from '@/routes/HFLayout.tsx';
 import HLayout from '@/routes/HLayout.tsx';
 import DdeepCreate from '@/pages/Ddeep/DdeepCreate.tsx';
 import DdeepDetail from '@/pages/Ddeep/DdeepDetail.tsx';
-import Message from '@/pages/Message';
 import MyPage from '@/pages/MyPage';
 import DdeepMoreParticipating from '@/pages/Ddeep/DdeepMoreParticipating.tsx';
 import DdeepMoreRecruiting from '@/pages/Ddeep/DdeepMoreRecruiting.tsx';
+import Notification from '@/pages/Notification';
 
 const PageRouter = () => {
   return (
@@ -23,9 +23,18 @@ const PageRouter = () => {
           path={'/ddeep/create'}
           element={<DdeepCreate />}
         />
+      </Route>
+      <Route
+        element={
+          <HFLayout
+            headerVariant={'back'}
+            backPath={'/'}
+            headerTitle={'알림'}
+          />
+        }>
         <Route
-          path={'/message'}
-          element={<Message />}
+          path={'/notification'}
+          element={<Notification />}
         />
         <Route
           path={'/mypage'}

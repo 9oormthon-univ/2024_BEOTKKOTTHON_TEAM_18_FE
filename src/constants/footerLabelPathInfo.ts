@@ -3,9 +3,9 @@ export const footerLabelPathInfo = {
     path: '/',
     label: '홈'
   },
-  message: {
-    path: '/message',
-    label: '메세지'
+  notification: {
+    path: '/notification',
+    label: '알림'
   },
   ddeepCreate: {
     path: '/ddeep/create',
