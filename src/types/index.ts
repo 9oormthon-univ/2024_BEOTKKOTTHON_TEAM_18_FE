@@ -8,6 +8,7 @@ export interface DdeepInfo {
   description: string;
   isLeader: boolean;
   isDone: boolean;
+  isParticipating: boolean;
 }
 
 type Comment = {
