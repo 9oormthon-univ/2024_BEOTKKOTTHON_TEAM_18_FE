@@ -31,8 +31,10 @@ const SignUp = () => {
                   {...form.register('loginId')}
                   className={'w-[238px]'}
                 />
+
                 {form.formState.errors.loginId && (
-                  <div className={'text-hc-coral text-[12px] mt-1 ml-2'}>
+                  <div className={'text-hc-coral text-[12px] mt-[3px] ml-3 '}>
+                    <hr className="border w-[210px]" />
                     {form.formState.errors.loginId.message}
                   </div>
                 )}
@@ -60,7 +62,8 @@ const SignUp = () => {
                   className={'w-[238px]'}
                 />
                 {form.formState.errors.nickname && (
-                  <div className={'text-hc-coral text-[12px] mt-1 ml-2'}>
+                  <div className={'text-hc-coral text-[12px] mt-[3px] ml-3 '}>
+                    <hr className="border w-[210px]" />
                     {form.formState.errors.nickname.message}
                   </div>
                 )}
@@ -88,7 +91,8 @@ const SignUp = () => {
               placeholder="영어, 특수문자 포함 8자리 이상 "
             />
             {form.formState.errors.password && (
-              <div className={'text-hc-coral text-[12px] mt-1 ml-2'}>
+              <div className={'text-hc-coral text-[12px] mt-[3px] ml-3 '}>
+                <hr className="border w-[310px]" />
                 {form.formState.errors.password.message}
               </div>
             )}
@@ -105,7 +109,8 @@ const SignUp = () => {
               type="password"
             />
             {form.formState.errors.checkPassword && (
-              <div className={'text-hc-coral text-[12px] mt-1 ml-2'}>
+              <div className={'text-hc-coral text-[12px] mt-[3px] ml-3 '}>
+                <hr className="border w-[310px]" />
                 {form.formState.errors.checkPassword.message}
               </div>
             )}
