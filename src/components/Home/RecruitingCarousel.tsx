@@ -8,13 +8,30 @@ import { Card, CardContent } from '@/components/ui/card.tsx';
 import { Badge } from '@/components/ui/badge.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { useNavigate } from 'react-router-dom';
+import { DdeepInfo } from '@/types';
+import enterDdeep from '@/apis/enterDdeep.ts';
+import { toast } from 'sonner';
 
-const RecruitingCarousel = () => {
+interface RecruitingCarouselProps {
+  data: DdeepInfo[];
+}
+
+const handleEnterDdeep = async (id: string) => {
+  const res = await enterDdeep(id);
+  if (res.isSuccess === true) {
+    toast.success('띱 참여에 성공했습니다!');
+  }
+  if (!res.isSuccess) {
+    toast.error('띱 참여에 실패했습니다!');
+  }
+};
+
+const RecruitingCarousel = ({ data }: RecruitingCarouselProps) => {
   const navigate = useNavigate();
   return (
     <Carousel className={'w-full max-w-sm'}>
       <CarouselContent className={'w-full mx-auto'}>
-        {Array.from({ length: 3 }).map((_, index) => (
+        {data.map((ddeep, index) => (
           <CarouselItem
             needBasisFull={false}
             className={'flex justify-center px-0.5'}
@@ -27,33 +44,31 @@ const RecruitingCarousel = () => {
                 <div className={'w-full mt-2 flex'}>
                   <Badge
                     className={
-                      'w-9 h-4 bg-hc-blue-dark text-hc-white text-[8px]'
+                      'w-11 h-4 bg-hc-blue-dark text-hc-white text-[8px]'
                     }>
-                    {/* TODO: 대체 필요 */}
-                    카공
+                    {ddeep.type}
                   </Badge>
                 </div>
                 <div className={'w-full flex justify-between'}>
                   <div className={'text-[10px] font-bold text-hc-black'}>
-                    띱! 같이 전시회 가실 분 구합니다!
+                    {ddeep.name}
                   </div>
                   <div
                     className={
                       'text-[8px] text-hc-grayDark cursor-pointer underline'
                     }
-                    onClick={() => navigate('/ddeep/123')}>
+                    onClick={() => navigate(`/ddeep/${ddeep.recruitmentIdx}`)}>
                     상세보기
                   </div>
                 </div>
                 <div className={'flex flex-col gap-y-1'}>
                   <div className={'flex gap-x-1'}>
-                    {/* TODO: 대체 필요*/}
                     <div
                       className={'text-[8px] font-semibold text-hc-blue-dark'}>
                       이름 |
                     </div>
                     <div className={'text-[8px] font-semibold text-hc-black'}>
-                      김헤쳐
+                      {ddeep.leader}
                     </div>
                   </div>
                   <div className={'flex gap-x-1'}>
@@ -62,7 +77,7 @@ const RecruitingCarousel = () => {
                       인원 |
                     </div>
                     <div className={'text-[8px] font-semibold text-hc-black'}>
-                      4명/5명
+                      {`${ddeep.participantNumber}명/${ddeep.participantLimit}명`}
                     </div>
                   </div>
                   <div className={'flex gap-x-1'}>
@@ -71,7 +86,7 @@ const RecruitingCarousel = () => {
                       설명 |
                     </div>
                     <div className={'text-[8px] font-semibold text-hc-black'}>
-                      전시회 가서 예쁜 그림도 보고 사진도 찍어요~
+                      {ddeep.description}
                     </div>
                   </div>
                 </div>
@@ -79,8 +94,11 @@ const RecruitingCarousel = () => {
                   <Button
                     className={
                       'w-[45px] h-[18px] bg-hc-blue-300 text-hc-white text-[8px] rounded-[12px]'
+                    }
+                    onClick={() =>
+                      handleEnterDdeep(ddeep.recruitmentIdx.toString())
                     }>
-                    나가기
+                    참여하기
                   </Button>
                 </div>
               </CardContent>
