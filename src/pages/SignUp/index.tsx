@@ -29,7 +29,7 @@ const SignUp = () => {
                 <Input
                   variant={'white'}
                   {...form.register('loginId')}
-                  className={'w-[238px]'}
+                  className={'w-[238px] mb-[5px]'}
                 />
 
                 {form.formState.errors.loginId && (
@@ -42,8 +42,7 @@ const SignUp = () => {
               <Button
                 variant={'primary'}
                 size={'sm'}
-                type={'submit'}
-                className={'mt-[20px]'}>
+                type={'submit'}>
                 중복확인
               </Button>
             </div>
@@ -59,7 +58,7 @@ const SignUp = () => {
                 <Input
                   variant={'white'}
                   {...form.register('nickname')}
-                  className={'w-[238px]'}
+                  className={'w-[238px] mb-[5px]'}
                 />
                 {form.formState.errors.nickname && (
                   <div className={'text-hc-coral text-[12px] mt-[3px] ml-3 '}>
@@ -72,8 +71,7 @@ const SignUp = () => {
               <Button
                 variant={'primary'}
                 size={'sm'}
-                type={'submit'}
-                className={'mt-[20px]'}>
+                type={'submit'}>
                 중복확인
               </Button>
             </div>
@@ -120,7 +118,8 @@ const SignUp = () => {
             variant={'primary'}
             size={'lg'}
             type={'submit'}
-            onClick={handleSubmit}>
+            onClick={handleSubmit}
+            className={'mt-[30px]'}>
             회원가입
           </Button>
         </form>
