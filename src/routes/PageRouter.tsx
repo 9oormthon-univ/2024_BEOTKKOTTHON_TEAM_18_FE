@@ -10,6 +10,7 @@ import MyPage from '@/pages/MyPage';
 import DdeepMoreParticipating from '@/pages/Ddeep/DdeepMoreParticipating.tsx';
 import DdeepMoreRecruiting from '@/pages/Ddeep/DdeepMoreRecruiting.tsx';
 import Notification from '@/pages/Notification';
+import { Suspense } from 'react';
 
 const PageRouter = () => {
   return (
@@ -17,11 +18,19 @@ const PageRouter = () => {
       <Route element={<HFLayout />}>
         <Route
           path="/"
-          element={<Home />}
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Home />
+            </Suspense>
+          }
         />
         <Route
           path={'/ddeep/create'}
           element={<DdeepCreate />}
+        />
+        <Route
+          path={'/mypage'}
+          element={<MyPage />}
         />
       </Route>
       <Route
@@ -36,10 +45,6 @@ const PageRouter = () => {
           path={'/notification'}
           element={<Notification />}
         />
-        <Route
-          path={'/mypage'}
-          element={<MyPage />}
-        />
       </Route>
       <Route
         element={
@@ -51,7 +56,11 @@ const PageRouter = () => {
         }>
         <Route
           path={'/ddeep/:id'}
-          element={<DdeepDetail />}
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <DdeepDetail />
+            </Suspense>
+          }
         />
       </Route>
 
@@ -95,6 +104,10 @@ const PageRouter = () => {
           element={<DdeepMoreRecruiting />}
         />
       </Route>
+      <Route
+        element={<Login />}
+        path={'/users/login'}
+      />
     </Routes>
   );
 };

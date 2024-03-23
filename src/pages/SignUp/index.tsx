@@ -5,16 +5,63 @@ import { Form, FormItem } from '@/components/ui/form.tsx';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { isSingupValidSchema, Sign } from '@/schemas/signupSchema';
-
-//TODO: @승연 헤더 회원가입으로 수정
+import { useState } from 'react';
+import checkIdValid from '@/apis/checkIdValid.ts';
+import { toast } from 'sonner';
+import checkNicknameValid from '@/apis/checkNicknameValid.ts';
+import postSignup from '@/apis/postSignup.ts';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+  const [isIdValid, setIsIdValid] = useState(false);
+  const [isNicknameValid, setIsNicknameValid] = useState(false);
+  const navigate = useNavigate();
+
   const form = useForm<Sign>({
     resolver: zodResolver(isSingupValidSchema)
   });
 
+  const handleCheckId = async (id: string) => {
+    const res = await checkIdValid(id);
+    if (res.isSuccess === true) {
+      toast.success('사용 가능한 아이디입니다.');
+      setIsIdValid(true);
+    }
+    if (res.isSuccess === false) {
+      toast.error('이미 사용중인 아이디입니다.');
+    }
+  };
+
+  const handleCheckNickname = async (nickname: string) => {
+    const res = await checkNicknameValid(nickname);
+    if (res.isSuccess === true) {
+      toast.success('사용 가능한 닉네임입니다.');
+      setIsNicknameValid(true);
+    }
+    if (res.isSuccess === false) {
+      toast.error('이미 사용중인 닉네임입니다.');
+    }
+  };
+
   const handleSubmit = form.handleSubmit((data) => {
-    console.log(data);
+    if (!isIdValid || !isNicknameValid) {
+      toast.error('아이디와 닉네임 중복확인을 해주세요.');
+      return;
+    }
+    const signupData = {
+      loginId: data.loginId,
+      password: data.password,
+      nickname: data.nickname
+    };
+    postSignup(signupData).then((res) => {
+      if (res.isSuccess === true) {
+        toast.success('회원가입이 완료되었습니다.');
+        navigate('/');
+      }
+      if (res.isSuccess === false) {
+        toast.error('회원가입에 실패했습니다.');
+      }
+    });
   });
 
   return (
@@ -25,7 +72,7 @@ const SignUp = () => {
           <FormItem className={'flex flex-col mb-4'}>
             <p className={'text-lg font-semibold text-hc-grayDark'}>아이디 *</p>
             <div className="flex justify-between">
-              <div>
+              <div className={'flex flex-col'}>
                 <Input
                   variant={'white'}
                   {...form.register('loginId')}
@@ -33,7 +80,10 @@ const SignUp = () => {
                 />
 
                 {form.formState.errors.loginId && (
-                  <div className={'text-hc-coral text-[12px] mt-[3px] ml-3 '}>
+                  <div
+                    className={
+                      'flex flex-col text-hc-coral text-[12px] mt-[3px] ml-3'
+                    }>
                     <hr className="border w-[210px]" />
                     {form.formState.errors.loginId.message}
                   </div>
@@ -42,7 +92,11 @@ const SignUp = () => {
               <Button
                 variant={'primary'}
                 size={'sm'}
-                type={'submit'}>
+                type={'submit'}
+                onClick={(event) => {
+                  event.preventDefault();
+                  handleCheckId(form.getValues('loginId'));
+                }}>
                 중복확인
               </Button>
             </div>
@@ -50,28 +104,27 @@ const SignUp = () => {
 
           {/* 닉네임 */}
           <FormItem className={'flex flex-col mb-4'}>
-            <p className={'text-lg font-semibold  text-hc-grayDark'}>
-              닉네임 *
-            </p>
-            <div className="flex justify-between">
-              <div>
-                <Input
-                  variant={'white'}
-                  {...form.register('nickname')}
-                  className={'w-[238px] mb-[5px]'}
-                />
-                {form.formState.errors.nickname && (
-                  <div className={'text-hc-coral text-[12px] mt-[3px] ml-3 '}>
-                    <hr className="border w-[210px]" />
-                    {form.formState.errors.nickname.message}
-                  </div>
-                )}
-              </div>
-
+            <p className={'text-lg font-semibold text-hc-grayDark'}>닉네임 *</p>
+            <div className="flex justify-between items-center">
+              <Input
+                variant={'white'}
+                {...form.register('nickname')}
+                className={'w-[238px] mb-[5px]'}
+              />
+              {form.formState.errors.nickname && (
+                <div className={'text-hc-coral text-[12px] mt-[3px] ml-3'}>
+                  <hr className="border w-[210px]" />
+                  {form.formState.errors.nickname.message}
+                </div>
+              )}
               <Button
                 variant={'primary'}
                 size={'sm'}
-                type={'submit'}>
+                type={'submit'}
+                onClick={(event) => {
+                  event.preventDefault();
+                  handleCheckNickname(form.getValues('nickname'));
+                }}>
                 중복확인
               </Button>
             </div>

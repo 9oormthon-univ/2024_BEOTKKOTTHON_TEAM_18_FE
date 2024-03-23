@@ -15,14 +15,26 @@ import {
   DdeepRecruitingNumber
 } from '@/constants/selectOptions.ts';
 import Textarea from '@/components/common/Textarea.tsx';
+import createDdeep from '@/apis/createDdeep.ts';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 const DdeepCreate = () => {
+  const navigate = useNavigate();
   const form = useForm<Ddeep>({
     resolver: zodResolver(createDdeepSchema)
   });
 
   const handleSubmit = form.handleSubmit((data) => {
-    console.log(data);
+    createDdeep(data).then((res) => {
+      if (res.isSuccess === true) {
+        toast.success('띱 생성에 성공했습니다!');
+        navigate('/');
+      }
+      if (res.isSuccess === false) {
+        toast.error('띱 생성에 실패했습니다!');
+      }
+    });
   });
 
   return (
@@ -43,7 +55,7 @@ const DdeepCreate = () => {
           </FormItem>
           <div className={'flex gap-4'}>
             <FormField
-              name={'purpose'}
+              name={'type'}
               render={({ field }) => (
                 <FormItem className={'mb-4'}>
                   <div className={'flex flex-col gap-y-2 justify-center'}>
@@ -55,14 +67,14 @@ const DdeepCreate = () => {
                       onSelectedChange={field.onChange}
                     />
                     <FormMessage className={'text-hc-coral text-[12px]'}>
-                      {form.formState.errors.purpose?.message}
+                      {form.formState.errors.type?.message}
                     </FormMessage>
                   </div>
                 </FormItem>
               )}
             />
             <FormField
-              name={'recruitingNumber'}
+              name={'participantLimit'}
               render={({ field }) => (
                 <FormItem>
                   <div className={'flex flex-col gap-y-2 justify-center'}>
@@ -74,7 +86,7 @@ const DdeepCreate = () => {
                       onSelectedChange={field.onChange}
                     />
                     <FormMessage className={'text-hc-coral text-[12px]'}>
-                      {form.formState.errors.purpose?.message}
+                      {form.formState.errors.participantLimit?.message}
                     </FormMessage>
                   </div>
                 </FormItem>
@@ -85,11 +97,11 @@ const DdeepCreate = () => {
             <p className={'text-lg font-semibold'}>연락 링크</p>
             <Input
               variant={'white'}
-              {...form.register('contact')}
+              {...form.register('contactUrl')}
             />
-            {form.formState.errors.contact && (
+            {form.formState.errors.contactUrl && (
               <div className={'text-hc-coral text-[12px] mt-1'}>
-                {form.formState.errors.contact.message}
+                {form.formState.errors.contactUrl.message}
               </div>
             )}
           </FormItem>

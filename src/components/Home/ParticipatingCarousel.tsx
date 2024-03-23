@@ -8,12 +8,61 @@ import { Card, CardContent } from '@/components/ui/card.tsx';
 import { Badge } from '@/components/ui/badge.tsx';
 import { RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button.tsx';
+import { DdeepInfo } from '@/types';
+import leaveDdeep from '@/apis/leaveDdeep.ts';
+import { toast } from 'sonner';
+import cancelDdeep from '@/apis/cancelDdeep.ts';
+import doneDdeep from '@/apis/doneDdeep.ts';
 
-const ParticipatingCarousel = () => {
+interface ParticipatingCarouselProps {
+  data: DdeepInfo[];
+  refetch: () => void;
+}
+
+const ParticipatingCarousel = ({
+  data,
+  refetch
+}: ParticipatingCarouselProps) => {
+  const handleLeaveDdeep = async (id: string) => {
+    const res = await leaveDdeep(id);
+    if (res.isSuccess === true) {
+      toast.success('띱 탈퇴에 성공했습니다!');
+      refetch();
+    }
+    if (!res.isSuccess) {
+      toast.error('띱 탈퇴에 실패했습니다!');
+      refetch();
+    }
+  };
+
+  const handleCancelDdeep = async (id: string) => {
+    const res = await cancelDdeep(id);
+    if (res.isSuccess === true) {
+      toast.success('띱 모집이 취소되었습니다!');
+      refetch();
+    }
+    if (res.isSuccess === false) {
+      toast.error('띱 모집 취소에 실패했습니다!');
+      refetch();
+    }
+  };
+
+  const handleDoneDdeep = async (id: string) => {
+    const res = await doneDdeep(id);
+    if (res.isSuccess === true) {
+      toast.success('띱 모집을 완료했습니다!');
+      refetch();
+    }
+    if (res.isSuccess === false) {
+      toast.error('띱 모집을 완료하는 데 실패했습니다!');
+      refetch();
+    }
+  };
+
   return (
     <Carousel className={'w-full max-w-sm'}>
       <CarouselContent className={'w-full mx-auto'}>
-        {Array.from({ length: 3 }).map((_, index) => (
+        {data.map((ddeep, index) => (
           <CarouselItem
             needBasisFull={true}
             className={'flex justify-center'}
@@ -26,8 +75,7 @@ const ParticipatingCarousel = () => {
                 <div className={'w-full mt-5 flex justify-between'}>
                   <Badge
                     className={'bg-hc-blue-dark text-hc-white text-[10px]'}>
-                    {/* TODO: 대체 필요 */}
-                    전시회
+                    {ddeep.type}
                   </Badge>
                   <div
                     className={
@@ -40,17 +88,16 @@ const ParticipatingCarousel = () => {
                   </div>
                 </div>
                 <div className={'text-[14px] font-bold text-hc-black'}>
-                  띱! 같이 전시회 가실 분 구합니다!
+                  {ddeep.name}
                 </div>
                 <div className={'flex flex-col gap-y-1'}>
                   <div className={'flex gap-x-1'}>
-                    {/* TODO: 대체 필요*/}
                     <div
                       className={'text-[12px] font-semibold text-hc-blue-dark'}>
                       이름 |
                     </div>
                     <div className={'text-[12px] font-semibold text-hc-black'}>
-                      김헤쳐
+                      {ddeep.leader}
                     </div>
                   </div>
                   <div className={'flex gap-x-1'}>
@@ -59,7 +106,7 @@ const ParticipatingCarousel = () => {
                       인원 |
                     </div>
                     <div className={'text-[12px] font-semibold text-hc-black'}>
-                      4명/5명
+                      {`${ddeep.participantNumber}명/${ddeep.participantLimit}명`}
                     </div>
                   </div>
                   <div className={'flex gap-x-1'}>
@@ -68,18 +115,44 @@ const ParticipatingCarousel = () => {
                       설명 |
                     </div>
                     <div className={'text-[12px] font-semibold text-hc-black'}>
-                      전시회 가서 예쁜 그림도 보고 사진도 찍어요~
+                      {ddeep.description}
                     </div>
                   </div>
                 </div>
-                <div className={'w-full flex justify-end mt-1'}>
-                  <Button
-                    className={
-                      'w-[75px] h-[30px] bg-hc-blue-300 text-hc-white text-[12px] rounded-[12px]'
-                    }>
-                    나가기
-                  </Button>
-                </div>
+                {!ddeep.isLeader ? (
+                  <div className={'w-full flex justify-end mt-1'}>
+                    <Button
+                      className={
+                        'w-[75px] h-[30px] bg-hc-blue-300 text-hc-white text-[12px] rounded-[12px]'
+                      }
+                      onClick={() =>
+                        handleLeaveDdeep(ddeep.recruitmentIdx.toString())
+                      }>
+                      나가기
+                    </Button>
+                  </div>
+                ) : (
+                  <div className={'w-full flex justify-end mt-1 gap-x-1'}>
+                    <Button
+                      className={
+                        'w-[75px] h-[30px] bg-hc-white border-[1px] border-hc-blue-300 text-hc-blue-300 text-[12px] rounded-[12px]'
+                      }
+                      onClick={() =>
+                        handleCancelDdeep(ddeep.recruitmentIdx.toString())
+                      }>
+                      모집취소
+                    </Button>
+                    <Button
+                      className={
+                        'w-[75px] h-[30px] bg-hc-blue-300 text-hc-white text-[12px] rounded-[12px]'
+                      }
+                      onClick={() =>
+                        handleDoneDdeep(ddeep.recruitmentIdx.toString())
+                      }>
+                      모집완료
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </CarouselItem>
