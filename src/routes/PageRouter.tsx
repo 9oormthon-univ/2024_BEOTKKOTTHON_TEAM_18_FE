@@ -18,7 +18,11 @@ const PageRouter = () => {
       <Route element={<HFLayout />}>
         <Route
           path="/"
-          element={<Home />}
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Home />
+            </Suspense>
+          }
         />
         <Route
           path={'/ddeep/create'}
