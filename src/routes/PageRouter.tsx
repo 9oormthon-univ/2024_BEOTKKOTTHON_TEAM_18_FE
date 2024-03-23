@@ -35,11 +35,22 @@ const PageRouter = () => {
           path={'/ddeep/:id'}
           element={<DdeepDetail />}
         />
+      </Route>
+
+      <Route
+        element={
+          <HLayout
+            headerVariant={'back'}
+            backPath={'/users/login'}
+            headerTitle={'회원가입'}
+          />
+        }>
         <Route
           path={'/users/signup'}
           element={<SignUp />}
         />
       </Route>
+
       <Route
         path="/users/login"
         element={<Login />}
