@@ -10,6 +10,7 @@ import MyPage from '@/pages/MyPage';
 import DdeepMoreParticipating from '@/pages/Ddeep/DdeepMoreParticipating.tsx';
 import DdeepMoreRecruiting from '@/pages/Ddeep/DdeepMoreRecruiting.tsx';
 import Notification from '@/pages/Notification';
+import { Suspense } from 'react';
 
 const PageRouter = () => {
   return (
@@ -51,7 +52,11 @@ const PageRouter = () => {
         }>
         <Route
           path={'/ddeep/:id'}
-          element={<DdeepDetail />}
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <DdeepDetail />
+            </Suspense>
+          }
         />
       </Route>
 
