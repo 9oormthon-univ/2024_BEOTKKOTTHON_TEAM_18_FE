@@ -1,24 +1,27 @@
-import Button from '@/components/common/Button';
-import Input from '@/components/common/Input';
-import React, { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+import Button from '@/components/common/Button';
+import Input from '@/components/common/Input';
+
 const Login = () => {
-  const [loginId, setLoginId] = useState('');
-  const [password, setPassword] = useState('');
+  const idRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   const [loginIdError, setLoginIdError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
   const handleLogin = () => {
-    setLoginIdError(loginId === '');
-    setPasswordError(password === '');
-
-    if (loginId === '' || password === '') {
-      return;
+    if (idRef.current && !idRef.current.value) {
+      setLoginIdError(idRef.current.value === '');
     }
 
-    console.log('loginId : ', loginId);
-    console.log('password : ', password);
+    if (passwordRef.current && !passwordRef.current.value) {
+      setPasswordError(passwordRef.current.value === '');
+    }
+
+    console.log('loginId : ', idRef.current?.value);
+    console.log('password : ', passwordRef.current?.value);
   };
 
   return (
@@ -36,8 +39,7 @@ const Login = () => {
             <Input
               variant="gray"
               placeholder="아이디를 입력해주세요"
-              value={loginId}
-              onChange={(e) => setLoginId(e.target.value)}
+              ref={idRef}
             />
             {loginIdError && (
               <div>
@@ -54,8 +56,7 @@ const Login = () => {
               variant="gray"
               placeholder="비밀번호를 입력해주세요"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              ref={passwordRef}
             />
             {passwordError && (
               <div>
